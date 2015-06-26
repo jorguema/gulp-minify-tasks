@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
 	less = require('gulp-less'),
+	nodemon = require('gulp-nodemon'),
 	path = require('path');
 
 
@@ -27,5 +28,15 @@ gulp.task('compileless', function () {
 
 gulp.task('default', function() {
     return console.log ("Hello gulp!");
+});
+
+gulp.task('nodemon', function () {
+   nodemon({ script: 'server.js'})
+       .on('start', function () {
+           gulp.run('watchall');
+       })
+       .on('change', function () {
+           gulp.run('watchall');
+       })
 });
 
